@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody rbPlayer;
+    [SerializeField] private Rigidbody rbPlayer;
     [SerializeField] private float forwardForce = 100.0f;
+    [SerializeField] private float sidewaysForce = 30.0f;
 
     void FixedUpdate() // est appelé 50x par seconde
     {
-        if (Input.GetKey("d"))
+        if (Input.GetKey(KeyCode.D))
         {
-            rbPlayer.AddForce(0.0f, 0.0f, forwardForce); // Ajoute une force au joueur
+            rbPlayer.AddForce(sidewaysForce, 0.0f, 0.0f);
         }
-        
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rbPlayer.AddForce(-sidewaysForce, 0.0f, 0.0f);
+        }
+        rbPlayer.AddForce(0.0f, 0.0f, forwardForce); // Ajoute une force au joueur
     }
 }
